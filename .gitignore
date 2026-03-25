@@ -1,0 +1,30 @@
+# --- Python & Environment ---
+__pycache__/
+*.py[cod]
+*$py.class
+proj_env_02/
+venv/
+.env
+
+# --- Data & Large Binaries ---
+# We ignore the raw and processed data (save GitHub storage)
+data/raw/
+data/processed/*.npy
+data/processed/*.csv
+
+# --- Experiment Logs & Checkpoints ---
+# We keep the directory structure but ignore the actual heavy weights
+experiments/checkpoints/**/*
+!experiments/checkpoints/.gitkeep
+
+# Ignore local run logs and heatmaps
+experiments/logs/*.png
+experiments/logs/*.txt
+experiments/logs/*.jpg
+experiments/logs/*.json
+
+# --- System & IDE ---
+.DS_Store
+.vscode/
+.idea/
+*.swp

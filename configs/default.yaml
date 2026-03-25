@@ -1,0 +1,22 @@
+# configs/default.yaml
+experiment:
+  seed: 42
+  log_dir: "experiments/logs"
+  checkpoint_dir: "experiments/checkpoints"
+
+data:
+  train_x: "data/processed/X_train.npy"
+  train_y: "data/processed/y_train.npy"
+  test_x: "data/processed/X_test.npy"
+  test_y: "data/processed/y_test.npy"
+  num_classes: 6
+  num_features: 9
+  window_size: 128
+
+training:
+  batch_size: 64
+  epochs: 100        # Increased default for autonomous training
+  patience: 10       # Number of epochs to wait before stopping
+  learning_rate: 0.001
+  optimizer: "adam"
+  weight_decay: 0.0001

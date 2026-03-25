@@ -1,0 +1,13 @@
+model:
+  name: "advanced_hybrid"
+  cnn_dim: 64         # Dimensionality of the shared CNN stem
+  lstm_hidden: 64     # Hidden units in the Bi-LSTM stream
+  nhead: 4            # Attention heads in the Transformer stream
+  trans_layers: 2     # Depth of the Transformer stream
+
+training:
+  batch_size: 32      # Reduced batch size for complex hybrid memory overhead
+  epochs: 200
+  learning_rate: 0.0001
+  weight_decay: 0.0005 # Increased decay to regularize the parallel streams
+  patience: 20

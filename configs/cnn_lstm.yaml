@@ -1,0 +1,15 @@
+# configs/cnn_lstm.yaml
+model:
+  name: "cnn_lstm"
+  cnn_filters_1: 64
+  cnn_filters_2: 128
+  cnn_kernel_size: 3
+  lstm_hidden_dim: 64
+  lstm_num_layers: 1
+  dropout_rate: 0.5
+
+training:
+  batch_size: 64
+  epochs: 200        # Maximum limit; the EarlyStopper will likely kill it around 60-80
+  patience: 12       
+  learning_rate: 0.001

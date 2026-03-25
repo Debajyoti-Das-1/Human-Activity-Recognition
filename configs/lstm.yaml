@@ -1,0 +1,12 @@
+# configs/lstm.yaml
+model:
+  name: "lstm"
+  hidden_dim: 64
+  num_layers: 2
+  dropout_rate: 0.5
+
+training:
+  batch_size: 64
+  epochs: 150        # LSTMs take longer to converge
+  patience: 15       # Give it more room to learn sequences
+  learning_rate: 0.0005

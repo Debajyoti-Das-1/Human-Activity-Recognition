@@ -1,0 +1,14 @@
+# configs/cnn.yaml
+model:
+  name: "cnn"
+  filters_block_1: 64
+  filters_block_2: 128
+  kernel_size: 3
+  pool_size: 2
+  dense_dim: 100
+  dropout_rate: 0.5
+
+training:
+  epochs: 80
+  patience: 8        # CNN overfits fast, so stop early if it plateaus
+  learning_rate: 0.001

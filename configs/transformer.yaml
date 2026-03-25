@@ -1,0 +1,13 @@
+model:
+  name: "transformer"
+  d_model: 128        # Doubling capacity for longer training
+  nhead: 8
+  num_layers: 4        # More depth to capture complex patterns
+  dropout_rate: 0.2    # Increase dropout to fight the overfitting we'll face
+
+training:
+  batch_size: 32
+  epochs: 300          # The "Long Run"
+  learning_rate: 0.0001
+  optimizer: "adam"
+  weight_decay: 0.0001 # L2 regularization is CRITICAL for 300 epochs
