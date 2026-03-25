@@ -1,96 +1,82 @@
 # 🧠 Human Activity Recognition (HAR)
-### 🚀 Dual-Stream Deep Learning System for Time-Series Intelligence
+### 🚀 Parallel Dual-Stream Hybrid System for Time-Series Intelligence
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PyTorch-DeepLearning-EE4C2C?style=for-the-badge&logo=pytorch"/>
-  <img src="https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python"/>
-  <img src="https://img.shields.io/badge/Captum-ExplainableAI-blue?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/Status-Research--to--Production-success?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?style=for-the-badge&logo=pytorch"/>
+  <img src="https://img.shields.io/badge/Hardware-M4_Pro_Optimized-success?style=for-the-badge&logo=apple"/>
+  <img src="https://img.shields.io/badge/Captum-Axiomatic_XAI-blue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Accuracy-91.62%25-green?style=for-the-badge"/>
 </p>
 
 ---
 
-## 📌 TL;DR
+## 📌 Overview
 
-A **research-grade Human Activity Recognition system** that:
+This repository implements a **State-of-the-Art (SOTA) Human Activity Recognition system** using high-frequency (**50Hz**) multivariate sensor data.
 
-- ⚡ Processes **50Hz multivariate sensor data**
-- 🧠 Benchmarks CNN, LSTM, Transformer architectures
-- 🚀 Proposes a **novel Dual-Stream Hybrid model**
-- 🔍 Uses **Explainable AI (Captum)** to interpret decisions
-- 📡 Simulates **real-time inference pipelines**
+The core contribution is a **Parallel Dual-Stream Hybrid architecture** that fuses:
 
-> 💡 Designed like a real-world ML system — not just a notebook experiment.
+- 🔁 **Bidirectional Temporal Dynamics** (Bi-LSTM)  
+- 🌐 **Global Spatial Attention** (Transformer)  
+
+This design enables the model to **simultaneously capture motion flow and posture context**, achieving:
+
+- 🚀 **91.62% accuracy**
+- ⚡ Optimized inference on **Apple Silicon (MPS / M4 Pro)**
+- 🧠 **Physically interpretable decision-making**
+
+> 💡 This is not just a model — it is a **research-to-production ML system**.
 
 ---
 
-## 🎯 Problem Statement
+## 🧠 Architecture: Parallel Advanced Hybrid
 
-Human Activity Recognition (HAR) is fundamentally challenging due to:
+Instead of naive sequential stacking, the model uses a **Shared CNN Stem + Parallel Dual Streams** to explicitly solve the:
 
 > ⚖️ **Temporal–Spatial Trade-off**
 
-- Short-term → motion signatures (e.g., steps, transitions)  
-- Long-term → posture & context (e.g., sitting vs standing)
-
-Most models fail to capture both **simultaneously**.
-
----
-
-## 🧠 Solution: Dual-Stream Hybrid Architecture
-
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yourusername/assets/main/har_architecture.png" width="700"/>
+  <img src="images/model_architecture.jpg" width="850"/>
 </p>
 
-### ⚙️ Architecture Breakdown
+---
 
-| Component | Role |
-|----------|------|
-| **CNN Stem** | Noise filtering + feature compression |
-| **Bi-LSTM Stream** | Temporal dynamics (forward + backward) |
-| **Transformer Stream** | Global self-attention (posture understanding) |
-| **Fusion Head** | Combines representations for final prediction |
+## ⚙️ Technical Breakdown
+
+### 🔹 Shared CNN Stem (Feature Compression)
+
+- 1D-CNN extracts **local motion signatures** (e.g., foot-strike patterns)
+- **MaxPool1d (128 → 64)** reduces temporal resolution  
+- Acts as a **noise filter + computational bottleneck optimizer**
 
 ---
 
-## 📊 Model Benchmarking
+### 🔹 Stream A: Temporal Dynamics (Bi-LSTM)
 
-| Model | Accuracy | Macro F1 | Insight |
-|------|---------|----------|--------|
-| **1D-CNN** | 90.91% | 0.9100 | Fast, but noise-sensitive |
-| **LSTM** | 90.74% | 0.9078 | Good sequence modeling, unstable |
-| **CNN-LSTM** | 90.97% | 0.9114 | Strong baseline |
-| **Transformer** | 88.94% | 0.8883 | Stable, global context |
-| **🚀 Advanced Hybrid** | **91.62%** | **0.9167** | **Best performance** |
-
----
-
-## 🔬 Explainability (XAI)
-
-Using **Captum + Integrated Gradients**:
-
-### 🧩 Key Insight: *Sitting vs Standing*
-
-- Accelerometer signals ≈ identical  
-- Traditional models fail ❌  
-
-### ✅ Model Discovery:
-
-- Ignores accelerometer  
-- Focuses on **Body Gyro X**
-
-> 💡 The model learns **micro-rotational sway (inverted pendulum effect)** — a real physical phenomenon.
-
-👉 This confirms the model is learning **physics-aware representations**, not just correlations.
+- Captures **chronological motion flow**
+- Bidirectional processing:
+  - Forward: $\overrightarrow{h}_t$
+  - Backward: $\overleftarrow{h}_t$
+- Learns directional patterns:
+  - ✅ Walking Upstairs vs Downstairs
 
 ---
 
-## 🚀 Quick Start
+### 🔹 Stream B: Global Context (Transformer)
 
-### 1️⃣ Clone & Install
+- Uses **4-head Self-Attention**
+- Observes the **entire 2.56s window simultaneously**
+- Overcomes:
+  - ❌ Sequential memory limitations  
+  - ❌ Information decay  
 
-```bash
-git clone https://github.com/Debajyoti-Das-1/Human-Activity-Recognition.git
-cd har_project
-pip install -r requirements.txt
+Learns:
+- Posture distribution  
+- Gravity alignment  
+- Static activity cues  
+
+---
+
+### 🔹 Fusion & Decision Head
+
+- Concatenation:
